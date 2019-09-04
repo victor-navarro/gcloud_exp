@@ -162,7 +162,11 @@ if (condition == 1){
 	n1 = JSON.parse(JSON.stringify(un_trials));
 	n2 = JSON.parse(JSON.stringify(bi_trials));
 	}
-
+//console.log(un_trials)
+//console.log(n1)
+//console.log(n2)
+//console.log(os)
+//console.log(bs)
 
 //define some keys
 side_keys = ['F', 'J'];
@@ -184,6 +188,7 @@ for (i = 0; i < n1.sample.length; i++){
 	n1.network[i] = net_keys[n1.network[i]]
 	n1.trialtype[i] = ttype_keys[n1.trialtype[i]]
 }
+
 for (i = 0; i < n2.sample.length; i++){
 	if (n2.trialtype[i] == 1){
 		n2.sample[i] = os[tSamples/2+n2.sample[i]]
@@ -212,6 +217,7 @@ if (location.search.substring(1)) {
     var temp = parameters[0].split("=");
     if (temp[1]) {turkWorkerID = unescape(temp[1])};
 };
+
 
 
 //NEEDED//

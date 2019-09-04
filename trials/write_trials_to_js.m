@@ -5,14 +5,16 @@ load('unique_trials.mat')
 
 %need to add the side key
 trials = [[trials, ones(size(trials, 1), 1)]; [trials(:, 1), trials(:, 3), trials(:, 2), trials(:, 4:end), ones(size(trials, 1), 1)+1]];
+
+nsamples = max(trials(:, 1));
+
 trials = trials-1;
 
 
 bi = trials(trials(:, 5) == 0, :);
 un = trials(trials(:, 5) > 0, :);
 
-un(un > 3) = un(un > 3)-4;
-
+un(:, 1:3) = un(:, 1:3)-nsamples/2;
 
 %% unidirectional trials %%
 f = fopen('unidirectional.js', 'w');

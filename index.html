@@ -1,0 +1,502 @@
+<!doctype html>
+<html>
+<head>
+    <title>UIOWA Comparative Cognition Lab</title>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jspsych.js"></script>
+    <script src="./js/seedrandom.min.js"></script>
+    <script src="./js/plugins/snap.svg-min.js"></script>
+    
+    <script src="./js/plugins/jspsych-text.js"></script>
+    <script src="./js/plugins/jspsych-survey-text.js"></script>
+    <script src="./js/plugins/jspsych-html-button-response.js"></script>
+	<script src="./js/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="./js/plugins/jspsych-survey-multi-choice.js"></script>
+    <script src="./js/plugins/jspsych-instructions.js"></script>
+    <script src="./js/welcome.js"></script>
+	<script src="./trials/unidirectional.js"></script> 
+	<script src="./trials/bidirectional.js"></script> 
+    <link href="./js/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+
+    <style>
+    .fancyButton {
+      display: inline-block;
+      padding: 15px 15px;
+      font-size: 24px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: #4CAF50;
+      border: none;
+      box-shadow: 0 9px #999;
+    }
+    .fancyButton:hover {background-color: #3e8e41}
+    .fancyButton:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+    </style>
+    <style>
+    .fancyButtonRed {
+      display: inline-block;
+      padding: 15px 15px;
+      font-size: 24px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: #AF504C;
+      border: none;
+      box-shadow: 0 9px #999;
+    }
+    .fancyButtonRed:hover {background-color: #8e413e}
+    .fancyButtonRed:active {
+      background-color: #8e413e;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+    </style>
+	
+	<style>
+	img.auto_size {
+		width:30%;
+		margin:5%;
+		display: inline-block;
+	}
+	</style>
+	
+	<style>
+	.container {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  height: 200px;
+	  width: 400px;
+	  
+	  
+	}
+
+	.social {
+	  position: relative;
+	  display: inline-block;
+	  float: left;
+	  padding: 10px;
+	}
+	</style>
+
+
+</head>
+<body>
+    <div id="welcome"></div>
+</body>
+<script>
+
+
+/*
+var check = '<p>computer</p>';
+  (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = '<p>mobile</p>';})(navigator.userAgent||navigator.vendor||window.opera);
+console.log(check)
+*/
+
+
+function getDisplay(s1, s2, s3){
+	var html = '<div class="container"><div align="center;" class="social"><img src="img/'+s1+'" height="100"/></div>\
+	<div align="center;" class="social"><img src="img/'+s2+'" height="100"/></div>\
+	<div align="center;" class="social"><img src="img/'+s3+'" height="100"/></div>\
+	</div>'
+	return html
+}
+
+Math.seedrandom();
+rSeed = Math.floor(Math.random()*9999999);
+Math.seedrandom(rSeed);
+
+//MY VARS//
+var oi = [];
+var bi = [];
+var os = [];
+var bs = [];
+
+var tSamples = 12;
+for (i = 0; i < tSamples; i++){
+	oi.push(i);
+	bi.push(i);
+	os.push("object"+(i+1)+".jpg");
+	bs.push("button"+(i+1)+".jpg");
+	}
+
+//create an array for preloading images
+preload_arr = os.concat(bs);
+for (i = 0; i < preload_arr.length; i++){
+	preload_arr[i] = 'img/'+preload_arr[i];
+}
+preload_arr = preload_arr.concat('img/blank.jpg');
+
+//create an array and randomize indexes
+var oinds = jsPsych.randomization.shuffle(oi);
+var binds = jsPsych.randomization.shuffle(bi);
+
+//reorder
+os = oinds.map(i => os[i]);
+bs = binds.map(i => bs[i]);
+
+//might be better than Math.floor(Math.random()*nconditions)+1
+var condition = jsPsych.randomization.shuffle([1, 2, 3])[0];
+condition = 1;	
+//console.log([...new Set(un_trials.sample)])
+
+
+//get networks based on condition
+if (condition == 1){
+	n1 = JSON.parse(JSON.stringify(un_trials));
+	n2 = JSON.parse(JSON.stringify(un_trials));
+	}else if (condition == 2){
+	n1 = JSON.parse(JSON.stringify(bi_trials));
+	n2 = JSON.parse(JSON.stringify(bi_trials));
+	}else{
+	n1 = JSON.parse(JSON.stringify(un_trials));
+	n2 = JSON.parse(JSON.stringify(bi_trials));
+	}
+
+
+//define some keys
+side_keys = ['F', 'J'];
+net_keys = ['BI1', 'UN1', 'UC1', 'BI2', 'UN2', 'UC2'];
+ttype_keys = ['O', 'P'];
+
+//put stim information
+for (i = 0; i < n1.sample.length; i++){
+	if (n1.trialtype[i] == 1){
+		n1.sample[i] = os[n1.sample[i]]
+		n1.lstim[i] = bs[n1.lstim[i]]
+		n1.rstim[i] = bs[n1.rstim[i]]		
+	}else{
+		n1.sample[i] = bs[n1.sample[i]]
+		n1.lstim[i] = os[n1.lstim[i]]
+		n1.rstim[i] = os[n1.rstim[i]]
+	}
+	n1.correct_side[i] = side_keys[n1.correct_side[i]]
+	n1.network[i] = net_keys[n1.network[i]]
+	n1.trialtype[i] = ttype_keys[n1.trialtype[i]]
+}
+for (i = 0; i < n2.sample.length; i++){
+	if (n2.trialtype[i] == 1){
+		n2.sample[i] = os[tSamples/2+n2.sample[i]]
+		n2.lstim[i] = bs[tSamples/2+n2.lstim[i]]
+		n2.rstim[i] = bs[tSamples/2+n2.rstim[i]]
+	}else{
+		n2.sample[i] = bs[tSamples/2+n2.sample[i]]
+		n2.lstim[i] = os[tSamples/2+n2.lstim[i]]
+		n2.rstim[i] = os[tSamples/2+n2.rstim[i]]
+	}
+	n2.correct_side[i] = side_keys[n2.correct_side[i]]
+	n2.network[i] = net_keys[3+n2.network[i]]
+	n2.trialtype[i] = ttype_keys[n2.trialtype[i]]
+}
+//concatenate networks
+var keys = Object.keys(n1);
+for (i = 0; i < keys.length; i++){
+	n1[keys[i]] = n1[keys[i]].concat(n2[keys[i]])
+}
+
+var turkWorkerID = 0;
+// This next bit gets the worker ID, which will be passed in the parameters in the URL
+// It uses code from https://www.xul.fr/javascript/parameters.php
+if (location.search.substring(1)) {
+    var parameters = location.search.substring(1).split("&");
+    var temp = parameters[0].split("=");
+    if (temp[1]) {turkWorkerID = unescape(temp[1])};
+};
+
+
+//NEEDED//
+var turkcode = getTurkCode();
+var bonusAmount = 2;
+var correctionTrial = false;
+var firstAttempt = true;
+var trialOutcome;
+var totalCorrect = 0;
+var totalTrials = 0;
+var sampleDuration = 1000;
+var nRepetitions = 2
+var nBlocks = 4;
+var numTrialsTotal = n1.sample.length*nRepetitions;
+var blockSize = Math.ceil(numTrialsTotal/4);
+//console.log(numTrialsTotal)
+//IRB code
+if (turkWorkerID == 'IRB'){
+	tlength = 2;
+	var nRepetitions = 1;
+}else{
+	tlength = n1.sample.length;
+	}
+
+//prepare trials
+var full = [];
+for (i = 0; i < tlength; i++){ 
+	full[i] = {sample: n1.sample[i], lstim: n1.lstim[i], rstim: n1.rstim[i], correct_side: n1.correct_side[i], network: n1.network[i], trialtype: n1.trialtype[i]};
+}
+//console.log(full)
+
+
+
+
+
+/* text for the instruction check questions */
+var Q0_text = "<b>Question 1:</b> What will you be doing during this task?";
+var Q0_answers = ["I will complete a questionnaire about my personality.", "On each trial I will see a circle, and will be asked what color it is.", "On each trial I will see three pictures, and will decide which of two side pictures is correct, based on the picture located on the center of the screen."];     // Last one is correct
+var Q1_text = "<b>Question 2:</b> How often will you receive feedback on your decisions?";
+var Q1_answers = ["Never", "After every trial", "After every 10 trials"];     // Second one is correct
+var Q2_text = "<b>Question 3:</b> How can I receive a bonus of $"+bonusAmount+"?";
+var Q2_answers = ["I will receive a bonus if I make more correct responses than the average participant.", "I will receive a bonus if more than half of my responses are correct.", "I cannot receive a bonus."];     // Last one is correct
+var correctstring = '{"Q0":"' + Q0_answers[2] + '","Q1":"' + Q1_answers[1] + '","Q2":"' + Q2_answers[0]+ '"}';
+
+var sampleTrial = {
+	type: 'html-keyboard-response',
+	stimulus: function(){
+		return getDisplay('blank.jpg', jsPsych.timelineVariable('sample', true), 'blank.jpg')
+	},
+	prompt: 'Which one is correct?',
+	choices: jsPsych.NO_KEYS,
+	trial_duration: sampleDuration
+};
+
+var choiceTrial = {
+    type: 'html-keyboard-response',
+	stimulus: function(){
+		return getDisplay(jsPsych.timelineVariable('lstim', true), jsPsych.timelineVariable('sample', true), jsPsych.timelineVariable('rstim', true))
+	},
+	prompt: 'Which one is correct?',
+    choices: ['F', 'J'],
+    //prompt: "<center><p class='prompt'>Which of the two side pictures is correct?</p></center>",
+    on_finish: function(trial_data) {
+		if (trial_data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(jsPsych.timelineVariable('correct_side', true))) {
+			correctionTrial = false;
+			trialOutcome = 1;
+		}else{
+			trialOutcome = 0;
+			correctionTrial = true;
+		}
+		if (firstAttempt){
+			firstAttempt = false;
+			totalCorrect = totalCorrect+trialOutcome;
+			totalTrials++;
+			//save data
+			jsPsych.data.addDataToLastTrial({
+				trial: totalTrials,
+				correct: trialOutcome,
+				sample: jsPsych.timelineVariable('sample', true),
+				lstim: jsPsych.timelineVariable('lstim', true),
+				rstim: jsPsych.timelineVariable('rstim', true),
+				correct_side: jsPsych.timelineVariable('correct_side', true),
+				network: jsPsych.timelineVariable('network', true),
+				trialtype: jsPsych.timelineVariable('trialtype', true)
+			});
+			//console.log(Math.round(totalCorrect/totalTrials*100))
+		}
+	}
+};
+
+var trialFeedback = {
+	type:'html-keyboard-response',
+    choices: jsPsych.NO_KEYS,
+	trial_duration: 1000,
+	stimulus: function(){
+		if (correctionTrial){
+				return '<b>Error</b>'
+			}else{
+				return '<b>Correct</b>'
+		}
+	}
+}
+
+var blockScreen = {
+	type: 'html-keyboard-response',
+	stimulus: function(){
+				return 'You have completed a block of training!<br><br>Your current accuracy is: '+Math.round(totalCorrect/totalTrials*100)+'%. <br><br> You can take a break now, if you choose to do so. <br><br><b>Press any key to continue with the experiment.</b>'
+			}
+}
+
+var blockCheck = {
+	timeline: [blockScreen],
+	conditional_function: function(){
+		var go = false
+			if (!correctionTrial & totalTrials > 0 & !((totalTrials)%blockSize)){
+				go = true
+			}
+		return go
+	}
+}
+
+var trialLoop = {
+    timeline: [sampleTrial, choiceTrial, trialFeedback, blockCheck],
+	loop_function: function() {
+		if (!correctionTrial){
+			firstAttempt = true;
+		}
+        return correctionTrial;  // If repeatInstructions remains true, this will keep looping; if it becomes false, it will move on.
+    }
+};
+
+function getTurkCode(){
+	//randomize length
+	codeLength = jsPsych.randomization.shuffle([6, 7, 8, 9, 10])[0]
+	turkcode = (Math.floor(Math.random() * Math.pow(10, codeLength))).toString();
+	return turkcode
+};
+
+var giveTrials = {
+	timeline: [trialLoop],
+	timeline_variables: full,
+	randomize_order: true,
+	repetitions: nRepetitions
+}
+
+
+// ******************* BORING STUFF - INSTRUCTIONS, CONSENT FORMS ETC ******************
+
+
+var initial_instructions = {
+    type: "instructions",
+    pages: [
+        '<p>Thanks for agreeing to take part in this study!</p>In this study, you will be asked to complete a learning task.</p>',
+		'<p>On each screen, you will be shown a picture.<br><br>Then, after a second, two additional pictures will appear.<br><br>Your task is to decide which one of the two pictures (left or right) is the correct picture, based on the picture located on the center of the screen.<br><br><b>If you think the picture on the left is correct, you should press the F key.<br><br>If you think the picture on the right is correct, you should press the J key.</b><br><br>You will receive feedback for your choice on every trial</p>',
+        '<p>Your aim should be to make as many correct responses as you can. <b>You can receive a bonus payment, depending on how many correct responses you make.</b><br><br>We will collect data from a large number of participants in this task, and calculate the average number of correct responses that they made.<br><br><b>If you make more correct responses than the average participant, you will receive a bonus of $'+bonusAmount+'. So the more correct responses you make, the more likely you are to receive a bonus.</b></p>',
+        '<p>There will be ' + numTrialsTotal + ' trials in total. You can take as long as you like on each trial (your reaction time is not important in this study), but we recommend that you don\'t spend too long on any one trial. Typically, this experiment will take around 25-30 minutes to complete.<br><br><strong>Please don\'t write anything down during the experiment.</strong></p>'
+    ],
+    show_clickable_nav: true,
+    timing_post_trial: 100
+};
+
+var repeatInstructions = true;
+
+var ready_to_start = {
+    type: "html-button-response",
+    stimulus: "<p><br><center><b>Well done - all your answers were correct!</b></center><br></p>",
+    is_html: true,
+    choices: ['<p>Click here to start the experiment</p>'],
+    button_html: '<button class="fancyButton" style="vertical-align:middle"><span>%choice%</span></button><br><br>',
+    timing_post_trial: 500
+};
+
+var instruction_check = {
+    type: "survey-multi-choice",
+    preamble: ["<p align='center'><b>Check your knowledge before you begin!</b></p>"],
+    questions: [{prompt: Q0_text, name: 'Q0', options: Q0_answers, required: true}, 
+				{prompt: Q1_text, name: 'Q1', options: Q1_answers, required: true},
+				{prompt: Q2_text, name: 'Q2', options: Q2_answers, required: true}],
+    timing_post_trial: 100,
+    on_finish: function(data) {
+        if( data.responses == correctstring) {
+            repeatInstructions = false;
+        }
+    }
+};
+
+var check_failed_display = {
+    type: "html-button-response",
+    stimulus: '<p><br><center><b>Unfortunately, at least one of your answers was incorrect.</b></center><br></p>',
+    is_html: true,
+    choices: ['<p>Click here to read the instructions again</p>'],
+    button_html: '<button class="fancyButtonRed" style="vertical-align:middle"><span>%choice%</span></button><br><br>',
+    timing_post_trial: 300
+};
+
+
+var check_failed_conditional = {
+    timeline: [check_failed_display],
+    conditional_function: function(){
+        return repeatInstructions;      // If this is true, it will execute timeline (show failure screen)
+    }
+};
+
+
+var loop_instructions = {
+    timeline: [initial_instructions, instruction_check, check_failed_conditional],
+    loop_function: function() {
+        return repeatInstructions;  // If repeatInstructions remains true, this will keep looping; if it becomes false, it will move on.
+    }
+};
+
+
+var expt_finished_questions = {
+    type: "survey-text",
+    preamble: function() {
+        return "<p>The task is finished - well done!</p><b><p>Overall you made " + Math.round(100 * totalCorrect/totalTrials) + "% correct responses</p></b><p>Before we tell you a bit more about what we were studying in this experiment, we have a few quick questions - you can type your answers into the boxes below.</p>";
+    },
+    questions: [{prompt: "What do you think determined which of the buttons was correct?", rows: 5, columns: 60},
+				{prompt: "Were you distracted while you completed the task? e.g., by using your phone etc.", rows: 5, columns: 60},
+				{prompt: "Do you have any general comments about the experiment?", rows: 5, columns: 60}],
+    timing_post_trial: 100,
+
+    on_finish: function() {
+        $.post('submit',{"content": jsPsych.data.get().csv()}); // uncomment to post data
+      }
+};
+
+var debrief = {
+    type: "html-button-response",
+    stimulus: '<p>Thanks for taking part in this experiment! We appreciate your participation.<br><br>\
+	In this study, we are investigating:<br><br>\
+	(1) How people learn using feedback.<br><br>\
+	(2) How people combine different types of information (what they know is correct and what they know is incorrect) when they make decisions.<br><br></p>',
+    is_html: true,
+    choices: ['<b>Please click here to receive your completion code</b>'],
+    timing_post_trial: 100
+};
+
+var turkCode = {
+type: "html-keyboard-response",
+    stimulus: 'All done!<br><br>Your completion code is <b> ' + turkcode + '</b><br><br>To receive payment for the HIT, return to the Amazon Mechanical Turk page and enter this code.<br><br>Please contact us if something goes wrong and we will fix it as quickly as possible.</p>',
+    is_html: true,
+    timing_post_trial: 100,
+	choices: jsPsych.NO_KEYS
+	}
+
+
+
+
+// ******************* SET TIMELINE AND RUN EXPT ******************
+
+var exptTimeline = [];
+exptTimeline.push(loop_instructions);
+exptTimeline.push(ready_to_start);
+exptTimeline.push(giveTrials);
+exptTimeline.push(expt_finished_questions);
+exptTimeline.push(debrief);
+exptTimeline.push(turkCode);
+
+
+
+
+/* function to start the jsPsych experiment */
+function startExperiment(){
+
+    // record the turkcode in the jsPsych data
+    jsPsych.data.addProperties({
+        workerID: turkWorkerID,
+        rSeed: rSeed,
+        turkcode: turkcode,
+        condition: condition
+    });
+
+    jsPsych.init({
+        timeline: exptTimeline,
+		preload_images: preload_arr	
+    });
+};
+
+
+
+
+/* start by running the "welcome" */
+welcome.run();
+
+</script>
+
+</html>
